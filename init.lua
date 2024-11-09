@@ -111,7 +111,7 @@ require("nvim-tree").setup({
   },
 })
 
-require("nvim-tree.api").tree.open()
+--require("nvim-tree.api").tree.open()
 
 -- Make :bd and :q behave as usual when tree is visible
 vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
