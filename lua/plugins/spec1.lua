@@ -9,12 +9,31 @@ return {
     end,
   },
 
+{
+        "neovim/nvim-lspconfig",
+        dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" }, -- Optional helper tools
+        config = function()
+            require("mason").setup()
+            require("mason-lspconfig").setup {
+                ensure_installed = { "omnisharp" }
+            }
+            local lspconfig = require("lspconfig")
+            lspconfig.omnisharp.setup {
+                cmd = { "omnisharp" },
+                root_dir = lspconfig.util.root_pattern(".sln", ".csproj", ".git")
+            }
+        end
+    },
+
   {
     'dense-analysis/ale',
     config = function()
+        -- Set omnisharp executable
+        vim.g.ale_cs_omnisharp_executable = vim.fn.stdpath("data") .. "/mason/packages/omnisharp/omnisharp"
         -- Configuration goes here.
         local g = vim.g
-
+         -- Set DOTNET_ROOT environment variable if needed
+        vim.g.ale_cs_omnisharp_options = '--hostPID ' .. vim.fn.getpid()
         g.ale_ruby_rubocop_auto_correct_all = 1
         vim.g.ale_completion_enabled = 1
         g.ale_linters = {
