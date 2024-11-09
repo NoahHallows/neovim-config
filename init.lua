@@ -150,3 +150,5 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
     end
   end
 })
+
+vim.cmd.colorscheme "catppuccin"

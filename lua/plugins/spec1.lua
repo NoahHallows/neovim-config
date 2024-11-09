@@ -29,13 +29,21 @@ return {
   lazy = false,
   dependencies = {
     "nvim-tree/nvim-web-devicons",
+    "nvim-lua/plenary.nvim",
+     "MunifTanjim/nui.nvim",
   },
+  opts = {
+      window = {
+         position = "right",
+      },
+   },
   config = function()
-    require("nvim-tree").setup {}
+    require("nvim-tree").setup{}
   end,
   },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
-}
+},
+{ "catppuccin/nvim", name = "catppuccin", priority = 1000 }
 }
