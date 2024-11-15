@@ -23,7 +23,8 @@ return {
         vim.g.ale_completion_enabled = 0
         g.ale_linters = {
             cs = {'OmniSharp'},
-            lua = {'lua_language_server'}
+            lua = {'lua_language_server'},
+            python = {'pylint', 'flake8'},  -- Python linters
         }
     end,
   },
