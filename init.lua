@@ -1,4 +1,5 @@
 require("config.lazy")
+require("coc")
 -- Set clipboard to use system clipboard
 vim.opt.clipboard = 'unnamedplus'
 
@@ -152,6 +153,7 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 vim.g.OmniSharp_server_use_net6 = 1
 vim.cmd.colorscheme "catppuccin"
-vim.g.OmniSharp_highlighting = 0
-vim.g.ale_completion_enabled = 1
+vim.g.OmniSharp_highlighting = 1
+vim.g.ale_completion_enabled = 0
 require('mini.surround').setup()
+
