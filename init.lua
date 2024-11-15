@@ -152,3 +152,6 @@ vim.api.nvim_create_autocmd({'BufEnter', 'QuitPre'}, {
 })
 vim.g.OmniSharp_server_use_net6 = 1
 vim.cmd.colorscheme "catppuccin"
+vim.g.OmniSharp_highlighting = 0
+vim.g.ale_completion_enabled = 1
+require('mini.surround').setup()

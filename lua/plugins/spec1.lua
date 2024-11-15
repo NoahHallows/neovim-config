@@ -9,21 +9,6 @@ return {
     end,
   },
 
-{
-        "neovim/nvim-lspconfig",
-        dependencies = { "williamboman/mason.nvim", "williamboman/mason-lspconfig.nvim" }, -- Optional helper tools
-        config = function()
-            require("mason").setup()
-            require("mason-lspconfig").setup {
-                ensure_installed = { "omnisharp" }
-            }
-            local lspconfig = require("lspconfig")
-            lspconfig.omnisharp.setup {
-                cmd = { "omnisharp" },
-                root_dir = lspconfig.util.root_pattern(".sln", ".csproj", ".git")
-            }
-        end
-    },
 
   {
     'dense-analysis/ale',
@@ -50,19 +35,21 @@ return {
     "nvim-tree/nvim-web-devicons",
     "nvim-lua/plenary.nvim",
      "MunifTanjim/nui.nvim",
-  },
-  opts = {
-      window = {
-         position = "right",
-      },
-   },
-  config = function()
-    require("nvim-tree").setup{}
-  end,
+    },
   },
   {
     'nvim-lualine/lualine.nvim',
     dependencies = { 'nvim-tree/nvim-web-devicons' }
 },
-{ "catppuccin/nvim", name = "catppuccin", priority = 1000 }
+{ "catppuccin/nvim", name = "catppuccin", priority = 1000 },
+{ 'echasnovski/mini.nvim', version = false },
+ {
+        'neoclide/coc.nvim',
+        branch = 'release',
+        lazy = false, -- Load immediately or use conditions like lazy=true for deferred loading
+        config = function()
+            -- Optional configuration settings for coc.nvim can go here
+        end,
+    }
+
 }
