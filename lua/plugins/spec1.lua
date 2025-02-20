@@ -1,14 +1,5 @@
 return {
   -- the colorscheme should be available when starting Neovim
-  {
-    "OmniSharp/omnisharp-vim",
-    lazy = false, -- make sure we load this during startup if it is your main colorscheme
-    priority = 1000, -- make sure to load this before all the other start plugins
-    config = function()
-      -- load the colorscheme here
-    end,
-  },
-
 
   {
     'dense-analysis/ale',
@@ -22,7 +13,6 @@ return {
         g.ale_ruby_rubocop_auto_correct_all = 1
         vim.g.ale_completion_enabled = 0
         g.ale_linters = {
-            cs = {'OmniSharp'},
             lua = {'lua_language_server'},
             python = {'pylint', 'flake8'},  -- Python linters
         }
