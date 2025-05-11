@@ -1,4 +1,9 @@
 return {
+
+    {
+        "nvim-treesitter/nvim-treesitter",
+        build = ":TSUpdate"
+    },
   -- the colorscheme should be available when starting Neovim
 
   {
@@ -15,7 +20,12 @@ return {
         g.ale_linters = {
             lua = {'lua_language_server'},
             python = {'pylint', 'flake8'},  -- Python linters
+            c = {'clangd', 'gcc'},
         }
+        g.ale_c_clangd_options = '--header-insertion=never --background-index -j=4 --clang-tidy --suggest-missing-includes --include-cleaner-stdlib --include-cleaner --query-driver=/usr/bin/gcc,-I/usr/include,-I/usr/local/include'
+        g.ale_c_gcc_options = '-std=c11 -Wall -I/usr/include -I/usr/local/include'
+
+
     end,
   },
   {

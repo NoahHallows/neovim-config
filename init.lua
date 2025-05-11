@@ -156,4 +156,37 @@ vim.cmd.colorscheme "catppuccin"
 vim.g.OmniSharp_highlighting = 1
 vim.g.ale_completion_enabled = 0
 require('mini.surround').setup()
+vim.opt.clipboard:append("unnamedplus")
 
+-- C/C++ specific settings
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = {"c", "cpp"},
+  callback = function()
+    -- Set tab settings for C/C++
+    vim.opt_local.expandtab = true
+    vim.opt_local.tabstop = 2
+    vim.opt_local.shiftwidth = 2
+    vim.opt_local.softtabstop = 2
+    
+    -- Key mappings for C/C++ development
+    local opts = { noremap = true, silent = true }
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>cf', '<Cmd>call CocAction("format")<CR>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ch', '<Cmd>CocCommand clangd.switchSourceHeader<CR>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ci', '<Cmd>CocCommand clangd.symbolInfo<CR>', opts)
+    vim.api.nvim_buf_set_keymap(0, 'n', '<leader>ct', '<Cmd>CocCommand clangd.typeHierarchy<CR>', opts)
+  end,
+})
+
+-- Make sure coc-clangd is installed
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    vim.fn.system("which clangd >/dev/null 2>&1 || echo 'Please install clangd'")
+    vim.cmd([[
+      if !empty(finddir('node_modules/coc-clangd', expand('~/.config/coc/extensions')))
+        echom "coc-clangd is installed"
+      else
+        CocInstall coc-clangd
+      endif
+    ]])
+  end,
+})
